@@ -1,11 +1,7 @@
 package com.amazonaws.lambda.scraper;
 
 import java.io.IOException;
-
-import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.amazonaws.services.lambda.runtime.Context;
 
 /**
@@ -30,14 +26,19 @@ public class ScraperHandlerTest {
         return ctx;
     }
 
-    @Test
-    public void testScraperHandler() {
+/*    @Test
+    public void populateDatabase() throws IOException {
+    	LocalDate date = LocalDate.parse("2016-09-05");
+    	
         ScraperHandler handler = new ScraperHandler();
         Context ctx = createContext();
+    	do {
+        	System.out.println(DateTimeFormatter.ofPattern("dd MMM yyyy").format(date));
 
-        String output = handler.handleRequest(input, ctx);
-
-        // TODO: validate output here if needed.
-        Assert.assertEquals("Hello from Lambda!", output);
-    }
+            handler.build(date, ctx);
+    		
+    		date = date.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+    	} while (date.isBefore(LocalDate.now()));
+    	
+    }*/
 }

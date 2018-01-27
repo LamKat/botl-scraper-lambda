@@ -1,6 +1,11 @@
 package com.amazonaws.lambda.scraper;
 
+import java.util.Collections;
 import java.util.List;
+
+import com.vividsolutions.jts.geom.Geometry;
+
+import uk.me.jstott.jcoord.LatLng;
 
 public class Application {
 	private String lpa;
@@ -8,20 +13,20 @@ public class Application {
 	private String address;
 	private String description;
 	private String url;
-	private List<List<List<Double>>> geometry;
+	private Geometry geometry; 
 	
 	Application (String lpa, 
 				String refrence,
 				String address,
 				String description,
 				String url,
-				List<List<List<Double>>> geometry) {
+				Geometry geometry) {
 		this.lpa = lpa;
 		this.refrence = refrence;
 		this.address = address;
 		this.description = description;
 		this.url = url;
-		this.geometry = geometry; // Not technically pure, but the caller must promise not to change it
+		this.geometry = geometry;
 	}
 
 	public String getLpa() {
@@ -44,7 +49,7 @@ public class Application {
 		return url;
 	}
 
-	public List<List<List<Double>>> getGeometry() {
+	public Geometry getGeometry() {
 		return geometry;
 	}
 	

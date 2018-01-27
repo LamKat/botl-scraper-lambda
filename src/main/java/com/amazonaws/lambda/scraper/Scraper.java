@@ -1,9 +1,9 @@
 package com.amazonaws.lambda.scraper;
 
 import java.io.IOException;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface Scraper {
-	public List<Application> getApplications(Date week) throws IOException;
+	public List<Application> getApplications(LocalDate startOfWeek) throws IOException;
 }
