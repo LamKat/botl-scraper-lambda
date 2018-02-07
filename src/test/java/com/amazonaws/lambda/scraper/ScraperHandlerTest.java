@@ -1,7 +1,14 @@
 package com.amazonaws.lambda.scraper;
 
 import java.io.IOException;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
+
 import org.junit.BeforeClass;
+import org.junit.Test;
+
 import com.amazonaws.services.lambda.runtime.Context;
 
 /**
@@ -28,7 +35,7 @@ public class ScraperHandlerTest {
 
 /*    @Test
     public void populateDatabase() throws IOException {
-    	LocalDate date = LocalDate.parse("2016-09-05");
+    	LocalDate date = LocalDate.parse("2017-08-28");
     	
         ScraperHandler handler = new ScraperHandler();
         Context ctx = createContext();

@@ -1,11 +1,6 @@
 package com.amazonaws.lambda.scraper;
 
-import java.util.Collections;
-import java.util.List;
-
 import com.vividsolutions.jts.geom.Geometry;
-
-import uk.me.jstott.jcoord.LatLng;
 
 public class Application {
 	private String lpa;
@@ -51,6 +46,5 @@ public class Application {
 
 	public Geometry getGeometry() {
 		return geometry;
-	}
-	
+	}	
 }

@@ -17,14 +17,14 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.vividsolutions.jts.io.ByteOrderValues;
 import com.vividsolutions.jts.io.WKBWriter;
 
-public class ScraperHandler implements RequestHandler<Object, List<Application>> {
+public class ScraperHandler implements RequestHandler<Object, Object> {
 	private static String password = System.getenv("BOTL_DATABASE_PASSWORD");
 	private static String username = System.getenv("BOTL_DATABASE_USERNAME");
 	private static String endpoint = System.getenv("BOTL_DATABASE_ENDPOINT");
 	private static String port = System.getenv("BOTL_DATABASE_PORT");
 	
     @Override
-    public List<Application> handleRequest(Object input, Context context) {
+    public Object handleRequest(Object input, Context context) {
     	List<Scraper> scrapers = Arrays.asList(new NottinghamScraper(), new GedlingScraper());
     	LocalDate startOfWeek = LocalDate.now(ZoneId.of("Europe/London"))
     		             .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
@@ -42,7 +42,7 @@ public class ScraperHandler implements RequestHandler<Object, List<Application>>
 			context.getLogger().log("Unable to write to database");
 			e.printStackTrace();
 		}
-        return applications;
+        return null;
     }
     
     private void writeToDatabase(List<Application> apps) throws SQLException {
@@ -61,6 +61,7 @@ public class ScraperHandler implements RequestHandler<Object, List<Application>>
     		ps.setString(2, app.getLpa());
     		ps.setString(3, app.getAddress());
     		ps.setString(4, app.getDescription());
+    		System.out.println(app.getUrl().length() + " " + app.getUrl());
     		ps.setString(5, app.getUrl());
     		ps.setBytes(6, wkbWriter.write(app.getGeometry()));
     		ps.addBatch();

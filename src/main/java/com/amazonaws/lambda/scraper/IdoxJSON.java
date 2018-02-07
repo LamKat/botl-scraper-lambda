@@ -89,7 +89,7 @@ public class IdoxJSON {
 			
 			private static Coordinate osRefToLatLngCoord(Double x, Double y) {
 				LatLng latLng = (new OSRef(x,y)).toLatLng();
-				return new Coordinate(latLng.getLat(), latLng.getLng());
+				return new Coordinate(latLng.getLng(), latLng.getLat());
 			}
 			
 			public Geometry getGeometry(String geometryType) {
