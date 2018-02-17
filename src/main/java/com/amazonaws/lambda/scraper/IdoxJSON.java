@@ -89,6 +89,7 @@ public class IdoxJSON {
 			
 			private static Coordinate osRefToLatLngCoord(Double x, Double y) {
 				LatLng latLng = (new OSRef(x,y)).toLatLng();
+				latLng.toWGS84();
 				return new Coordinate(latLng.getLng(), latLng.getLat());
 			}
 			
@@ -105,11 +106,11 @@ public class IdoxJSON {
 		}
 	}
 	
-	public Application asApplication(String lpa, String url) {		
+	public Application asApplication(String lpa, String url) {	
 		return new Application(lpa, 
 				feature.attributes.refval, 
-				feature.attributes.address.trim().replace("\r", "<br>"),
-				feature.attributes.description,
+				feature.attributes.address.trim().replace("\r", ", "),
+				feature.attributes.description.trim().replace("\r", ", "),
 				url,
 				feature.geometry.getGeometry(geometryType));
 		

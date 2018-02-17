@@ -88,6 +88,7 @@ public class NottinghamScraper implements Scraper {
 		return Jsoup.connect(String.format(url, keyVal))
 				.referrer(REFERRER)
 			    .method(Method.GET)
+			    .timeout(10000)
 			    .execute()
 			    .body();
 	}

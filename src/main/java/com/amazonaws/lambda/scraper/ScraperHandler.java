@@ -61,7 +61,6 @@ public class ScraperHandler implements RequestHandler<Object, Object> {
     		ps.setString(2, app.getLpa());
     		ps.setString(3, app.getAddress());
     		ps.setString(4, app.getDescription());
-    		System.out.println(app.getUrl().length() + " " + app.getUrl());
     		ps.setString(5, app.getUrl());
     		ps.setBytes(6, wkbWriter.write(app.getGeometry()));
     		ps.addBatch();
@@ -70,4 +69,22 @@ public class ScraperHandler implements RequestHandler<Object, Object> {
     	
     	conn.close();
     }
+
+	public void build(LocalDate startOfWeek, Context context) {
+    	List<Scraper> scrapers = Arrays.asList(new NottinghamScraper(), new GedlingScraper());
+    	List<Application> applications = new ArrayList<Application>();
+
+		try {
+			for(Scraper scraper : scrapers) {
+				applications.addAll(scraper.getApplications(startOfWeek));
+			}
+        	writeToDatabase(applications);
+		} catch (IOException e) {
+			context.getLogger().log("Unable to fetch applications");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			context.getLogger().log("Unable to write to database");
+			e.printStackTrace();
+		}
+	}
 }
