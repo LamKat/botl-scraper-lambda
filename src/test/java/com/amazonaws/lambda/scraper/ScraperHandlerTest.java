@@ -43,7 +43,7 @@ public class ScraperHandlerTest {
         return ctx;
     }
 
-    @Test
+//    @Test
     public void populateDatabase() throws IOException {
     	LocalDate date = LocalDate.parse("2017-01-02");
     	

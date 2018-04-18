@@ -109,8 +109,8 @@ public class IdoxJSON {
 	public Application asApplication(String lpa, String url) {	
 		return new Application(lpa, 
 				feature.attributes.refval, 
-				feature.attributes.address.trim().replace("\r", ", "),
-				feature.attributes.description.trim().replace("\r", ", "),
+				feature.attributes.address.trim().replace("\r", ", ").replace("\"", "&quot;"),
+				feature.attributes.description.trim().replace("\r", ", ").replace("\"", "&quot;"),
 				url,
 				feature.geometry.getGeometry(geometryType));
 		
